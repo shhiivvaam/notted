@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as devtools show log;
 import '../firebase_options.dart';
 
 class LoginView extends StatefulWidget {
@@ -41,7 +42,8 @@ class _LoginViewState extends State<LoginView> {
             enableSuggestions: false,
             autocorrect: false,
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(hintText: 'Enter your Email here'),
+            decoration:
+                const InputDecoration(hintText: 'Enter your Email here'),
           ),
           TextField(
             controller: _password,
@@ -58,19 +60,28 @@ class _LoginViewState extends State<LoginView> {
                 );
                 final email = _email.text;
                 final password = _password.text;
-    
+
                 try {
-                  final userCredential = await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
+                  // final userCredential = await FirebaseAuth.instance
+                      await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
                           email: email, password: password);
-                  print(userCredential);
+
+                  // devtools.log(userCredential
+                  // .toString()); //* log only take String arguments and also it can only return string objects
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/notes/',
+                    (route) => false,
+                  );
+
+                  // print(userCredential);
                   // print("Hello Shivam");
                 } on FirebaseAuthException catch (e) {
-                  print(e.code);
+                  // print(e.code);
                   if (e.code == 'user-not-found') {
-                    print('User Not Found');
+                    devtools.log('User Not Found');
                   } else if (e.code == 'wrong-password') {
-                    print('Wrong Password');
+                    devtools.log('Wrong Password');
                   }
                 }
                 // catch (e) {

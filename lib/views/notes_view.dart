@@ -19,8 +19,10 @@ class NotesViewState extends State<NotesView> {
 
                   if (shouldLogout) {
                     await FirebaseAuth.instance.signOut();
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/login/', (_) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                      '/login/',
+                      (_) => false,
+                    );
                   }
                 // devtools.log(shouldLogout.toString());
                 // break;
@@ -62,7 +64,7 @@ Future<bool> showLogOutDialog(BuildContext context) {
                 onPressed: () {
                   Navigator.of(context).pop(true);
                 },
-                child: const Text('Log Out')),
+                child: const Text('Sign Out')),
           ],
         );
       }).then((value) => value ?? false);
