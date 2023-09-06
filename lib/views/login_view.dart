@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mynotes/constants/routes.dart';
 import 'dart:developer' as devtools show log;
 import '../firebase_options.dart';
 
@@ -70,7 +71,7 @@ class _LoginViewState extends State<LoginView> {
                   // devtools.log(userCredential
                   // .toString()); //* log only take String arguments and also it can only return string objects
                   Navigator.of(context).pushNamedAndRemoveUntil(
-                    '/notes/',
+                    notesRoute,
                     (route) => false,
                   );
 
@@ -94,7 +95,7 @@ class _LoginViewState extends State<LoginView> {
           TextButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/register/', (route) => false);
+                    .pushNamedAndRemoveUntil('registerRoute', (route) => false);
               },
               child: const Text('Not Registered yet? Register here!'))
         ],
