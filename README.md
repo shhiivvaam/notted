@@ -1,6 +1,6 @@
 # notted 
-# `Flutter Notes Application`
-# -> `helps save desired noted`
+## `Flutter Notes Application`
+### -> `helps save desired notes`
 
 <a href="https://flutter.dev/">
   <h1 align="center">
